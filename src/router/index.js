@@ -15,6 +15,20 @@ const routes = [
     name: 'Lab',
     component: () => import('../views/Lab.vue'),
     children: [
+      {
+        path: 'lab3',
+        components: {
+          default: () => import('../views/lab3/Canvas.vue'),
+          panel: () => import('../views/lab3/Panel.vue'),
+        },
+      },
+      {
+        path: 'lab4',
+        components: {
+          default: () => import('../views/lab4/Canvas.vue'),
+          panel: () => import('../views/lab4/Panel.vue'),
+        },
+      },
     ],
   },
   {

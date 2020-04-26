@@ -1,16 +1,11 @@
 <template>
-  <el-row id="main-row" :gutter="10">
+  <el-row :gutter="10">
     <router-view/>
     <router-view name="panel"/>
   </el-row>
 </template>
 
 <style>
-#main-row {
-  display: flex;
-  align-items: stretch;
-}
-
 #card-display,
 #card-panel {
   height: 98vh;
@@ -24,7 +19,13 @@
   background: transparent;
 }
 
-.el-card__body {
+#card-panel > .el-card__body {
   width: 100%;
+  padding: 2vh min(20px, 1vw);
+}
+
+canvas {
+  height: 98vh;
+  /* border: 1px solid lightgray; */
 }
 </style>
