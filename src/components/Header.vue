@@ -25,7 +25,7 @@ h1 {
   font-weight: lighter;
   letter-spacing: 2px;
   word-spacing: 4px;
-  text-shadow: #66666680 4px 4px 8px;
+  text-shadow: #66666660 4px 4px 10px;
 }
 
 @media (max-width: 640px) {

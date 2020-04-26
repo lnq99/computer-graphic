@@ -11,6 +11,13 @@ const routes = [
     component: Home,
   },
   {
+    path: '/',
+    name: 'Lab',
+    component: () => import('../views/Lab.vue'),
+    children: [
+    ],
+  },
+  {
     path: '*',
     redirect: '/',
   },
