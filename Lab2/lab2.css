@@ -1,0 +1,122 @@
+/* lab1 */
+
+body, html {
+    height: 100%;
+    overflow: hidden;
+    background-color: #0e3e4d;
+}
+
+.col {
+    margin: 0;
+    padding: 0;
+}
+
+.row {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+}
+
+.card {
+    margin: 0px;
+    padding: 10px;
+    height: 100%;
+    background: #f0f7f7;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+
+.cmd {
+    margin-bottom: 36px;
+}
+
+
+#top-panel {
+    height: auto;
+    margin-left: 10px;
+    /* display: flex; */
+    /* padding: 0 0 5px 10px; */
+    /* align-self: center ; */
+}
+
+
+#bottom-panel {
+    height: auto;
+    margin: 10px 0 0 10px;
+}
+
+
+
+.scrollbar {
+    position: relative;
+    height: 100%;
+    overflow: auto;
+}
+.table-scroll-y {
+    display: block;
+}
+
+
+
+.line {
+    fill: red;
+    opacity: 0.3;
+    stroke: #ffab00;
+    stroke-width: 2;
+}
+
+.overlay {
+    fill: none;
+    pointer-events: all;
+}
+
+
+.dot1 {
+    fill: red;
+    /* stroke: #fff; */
+}
+
+.dot2 {
+    fill: green;
+    /* stroke: #fff; */
+}
+  
+.focus {
+    r: 8px;
+}
+
+.selected {
+    background-color: white;
+}
+
+.cir {
+    /* stroke: black;
+    stroke-width: 5px;
+    fill: none; */
+}
+
+.result {
+    stroke: black;
+    stroke-width: 2px;
+    fill: none;
+}
+
+.resultfocus {
+    stroke-width: 5px;
+}
+
+
+.catfur {
+    fill: lightpink;
+}
+
+.eye {
+    fill: black;
+}
+
+.mouth {
+    opacity: 0.5;
+    stroke: black;
+    stroke-width: 2;
+}
