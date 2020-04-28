@@ -16,6 +16,13 @@ const routes = [
     component: () => import('../views/Lab.vue'),
     children: [
       {
+        path: 'lab2',
+        components: {
+          default: () => import('../views/lab2/Svg.vue'),
+          panel: () => import('../views/lab2/Panel.vue'),
+        },
+      },
+      {
         path: 'lab3',
         components: {
           default: () => import('../views/lab3/Canvas.vue'),
