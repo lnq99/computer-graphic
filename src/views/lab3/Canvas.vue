@@ -305,7 +305,7 @@ export default {
       const h = Math.round(window.innerHeight / 48);
       const tmp = Math.round(window.innerWidth / 11.2);
 
-      let start = 0;
+      let start = 5;
       this.changeScale(2);
 
       for (let i = 0; i < 6; i += 1) {

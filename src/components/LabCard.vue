@@ -25,6 +25,7 @@ export default {
 .image {
   width: 100%;
   display: block;
+  transform: scale(1.01, 1.02);
 }
 
 .el-card {
@@ -34,7 +35,7 @@ export default {
 }
 
 .el-card:hover {
-  filter: brightness(105%);
+  filter: brightness(103%);
   box-shadow: #66666660 2px 2px 12px;
 }
 
