@@ -73,7 +73,7 @@ function lineBreFloat(x1, y1, x2, y2) {
   return list;
 }
 
-function lineBreInt(x1, y1, x2, y2) {
+export function lineBreInt(x1, y1, x2, y2) {
   const list = [[x1, y1]];
   let dx = x2 - x1;
   let dy = y2 - y1;

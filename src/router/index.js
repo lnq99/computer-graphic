@@ -36,6 +36,20 @@ const routes = [
           panel: () => import('../views/lab4/Panel.vue'),
         },
       },
+      {
+        path: 'lab5',
+        components: {
+          default: () => import('../views/lab56/Canvas.vue'),
+          panel: () => import('../views/lab56/Panel.vue'),
+        },
+      },
+      {
+        path: 'lab6',
+        components: {
+          default: () => import('../views/lab56/Canvas.vue'),
+          panel: () => import('../views/lab56/Panel.vue'),
+        },
+      },
     ],
   },
   {

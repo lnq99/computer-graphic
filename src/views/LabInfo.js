@@ -15,6 +15,10 @@ export default {
     link: 'https://i.imgur.com/FHuAeQO.png',
   },
   5: {
-    description: 'Area Filling',
+    description: 'Area Filling (Scan Line)',
+    link: 'https://i.imgur.com/k39JUgQ.gif',
+  },
+  6: {
+    description: 'Area Filling (Flood Fill)',
   },
 };
