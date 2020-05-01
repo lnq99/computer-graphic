@@ -1,6 +1,11 @@
-## Computer Graphic
+## Computer Graphics - Компьютерная Графика
 
-## BMSTU - IU7 - 4 Semeter
+### BMSTU - IU7 - 4 Semeter
+
+[![Vue](https://img.shields.io/badge/vue-2.6.11-brightgreen.svg)](https://github.com/vuejs/vue)
+[![ElementUI](https://img.shields.io/badge/element--ui-2.13.1-brightgreen.svg)](https://github.com/ElemeFE/element)
+[![Build Status](https://travis-ci.com/lnq99/computer-graphic.svg?branch=master)](https://travis-ci.com/lnq99/computer-graphic)
+
 
 ```
 # Project setup
