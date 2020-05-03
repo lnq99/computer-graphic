@@ -37,8 +37,8 @@ function eachLine(ctx, stack, fill, border, maxWidth, maxHeight) {
   const l = x + 1;
 
   // cvs.drawLineBuiltin(ctx, l, y + 0.5, r + 1, y + 0.5, fill);
+  // раскрасить точки от l -> r
   cvs.putPixel(ctx, l, y, r - l + 1, 1);
-  // console.log(y, l, r);
 
   let flag; let current;
   for (const i of [1, -2]) {
@@ -51,18 +51,15 @@ function eachLine(ctx, stack, fill, border, maxWidth, maxHeight) {
 
       current = getContextColor(ctx, x, y);
       while (current !== fill && current !== border && x < r) {
-        if (!flag) flag = true;
-        // console.log(current);
+        flag = true;
         x += 1;
         current = getContextColor(ctx, x, y);
       }
 
       if (flag) {
         if (current !== fill && current !== border && x === r) {
-          // console.log(y, x, r, current);
           stack.push([x, y]);
         } else {
-          // console.log(y, x, r, current);
           stack.push([x - 1, y]);
         }
       }

@@ -104,6 +104,7 @@ export default {
         case 'run':
           if (this.timeout) {
             clearInterval(this.timeout);
+            this.timeout = 0;
           } else if (this.lab === '5') {
             this.onFillScanLine();
           } else {
@@ -179,12 +180,13 @@ export default {
       cvs.drawLineBuiltin(this.ctx, ...this.edge[this.edge.length - 1], '#ff9f40');
     },
     onFillScanLine() {
+      if (!this.edge.length) return;
       this.time = window.performance.now();
       this.timeout = fillScanLine(this.edge, this.ctx, this.fg, this.delay);
       this.time = window.performance.now() - this.time;
     },
     onFillBoundary() {
-      if (this.seed.length === 0) return;
+      if (!this.seed.length || !this.edge.length) return;
       cvs.canvasClear(this.backctx);
       this.time = window.performance.now();
       this.timeout = fillBoundary(this.edge, this.seed, this.ctx, this.fg, '#d3d3d3', this.delay, this.scale);

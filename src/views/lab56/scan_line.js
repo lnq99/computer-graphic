@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import * as cvs from '../common/canvas_drawing';
 
+
 // использовать алгоритм ДЦА
 function linePerY(x1, y1, x2, y2) {
   const list = [];
@@ -15,6 +16,7 @@ function linePerY(x1, y1, x2, y2) {
   return list;
 }
 
+
 function findOutline(edges) {
   const outline = [];
   edges.forEach((val) => {
@@ -25,6 +27,18 @@ function findOutline(edges) {
   });
   return outline;
 }
+
+
+function eachLine(ctx, pointList, i) {
+  const begin = pointList[i];
+  const end = pointList[i + 1];
+
+  // раскрасить точки от begin -> end
+  cvs.putPixel(ctx, ...begin, end[0] - begin[0], 1);
+  i += 2;
+  return i;
+}
+
 
 function fillScanLine(edges, ctx, color, delay) {
   const pointList = findOutline(edges);
@@ -38,44 +52,20 @@ function fillScanLine(edges, ctx, color, delay) {
   pointList.sort((a, b) => a[1] - b[1] || a[0] - b[0]);
 
   let i = 0;
-  let begin; let end;
   let timeout;
 
   if (delay) {
+    // с задержкой
     timeout = setInterval(() => {
       if (i < pointList.length) {
-        do {
-          begin = pointList[i];
-          end = pointList[i + 1];
-
-          // для случая маленького угла
-          cvs.putPixel(ctx, ...begin);
-
-          begin[1] += 0.5;
-          end[1] += 0.5;
-
-          // раскрасить точки от begin -> end
-          cvs.drawLineBuiltin(ctx, ...begin, ...end, color);
-          i += 2;
-        } while (pointList[i][1] === pointList[i - 2][1]);
+        i = eachLine(ctx, pointList, i, color);
       } else {
         clearInterval(timeout);
       }
     }, delay / 10);
   } else {
     while (i < pointList.length) {
-      begin = pointList[i];
-      end = pointList[i + 1];
-
-      // для случая маленького угла
-      cvs.putPixel(ctx, ...begin);
-
-      begin[1] += 0.5;
-      end[1] += 0.5;
-
-      // раскрасить точки от begin -> end
-      cvs.drawLineBuiltin(ctx, ...begin, ...end, color);
-      i += 2;
+      i = eachLine(ctx, pointList, i, color);
     }
   }
   return timeout;
