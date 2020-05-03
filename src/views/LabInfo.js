@@ -4,15 +4,15 @@ export default {
   },
   2: {
     description: 'Transformation',
-    link: 'https://i.imgur.com/eCFl9qj.png',
+    link: 'https://i.imgur.com/eCFl9qjl.png',
   },
   3: {
     description: 'Line Drawing',
-    link: 'https://i.imgur.com/k9JknRp.png',
+    link: 'https://i.imgur.com/k9JknRpl.png',
   },
   4: {
     description: 'Circle, Ellipse',
-    link: 'https://i.imgur.com/FHuAeQO.png',
+    link: 'https://i.imgur.com/FHuAeQOl.png',
   },
   5: {
     description: 'Area Filling (Scan Line)',
@@ -20,5 +20,6 @@ export default {
   },
   6: {
     description: 'Area Filling (Flood Fill)',
+    link: 'https://i.imgur.com/TVM4ca5.gif',
   },
 };
