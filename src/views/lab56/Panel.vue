@@ -10,10 +10,10 @@
     </el-form>
     <el-form>
       <el-form-item label="Foreground">
-        <el-color-picker :value=fg @change="changeFg" show-alpha></el-color-picker>
+        <el-color-picker :value=fg @change="changeFg"></el-color-picker>
       </el-form-item>
     </el-form>
-    <el-slider v-model="delay" :step="10" vertical height="200px"/>
+    <el-slider v-model="delay" :step="10" vertical height="150px"/>
     <el-button @click="cmd='clear'" type="danger" icon="el-icon-delete" circle/>
     <el-button @click="cmd='run'" type="primary" icon="el-icon-caret-right" circle/>
     <el-button @click="cmd='seed'" type="info" icon="el-icon-location-outline"

@@ -1,10 +1,9 @@
 /* eslint-disable no-shadow */
 const state = {
-  fg: '#efbb36',
+  fg: '#DA291C',
   bg: '#ffffff',
   cmd: '',
   delay: 0,
-  scale: 2,
 };
 
 const mutations = {

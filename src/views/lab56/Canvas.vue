@@ -4,21 +4,18 @@
     <canvas
       id="background"
       ref="background"
-      style="position: absolute; left: 0; top: 0; z-index: 0;"
     ></canvas>
     <canvas
       id="canvas"
       ref="canvas"
-      style="position: absolute; left: 0; top: 0; z-index: 1;"
     ></canvas>
     <canvas
       ref="draft"
       @click="onCanvas"
       @click.right="onCanvasEnd"
       @mousemove="onMove"
-      style="position: absolute; left: 0; top: 0; z-index: 2;"
     ></canvas>
-  <el-card v-show="onTime"> {{ this.time }} ms </el-card>
+    <el-card v-show="onTime" style="z-index: 1;"> {{ this.time }} ms </el-card>
   </el-card>
 </el-col>
 </template>
@@ -28,8 +25,10 @@
 import { mapState } from 'vuex';
 import Store from './Store5';
 import * as cvs from '../common/canvas_drawing';
-import scanLine from './scan_line';
+import fillScanLine from './scan_line';
+import fillBoundary from './boundary';
 import ironman from './test_ironman.json';
+import flags from './test_flags.json';
 
 
 export default {
@@ -45,7 +44,6 @@ export default {
       bg: 'bg',
       cmd: 'cmd',
       delay: 'delay',
-      scale: 'scale',
     }),
   },
   data() {
@@ -54,7 +52,7 @@ export default {
       down: false,
       edge: [],
       onSeed: false,
-      seed: [],
+      seed: [500, 300],
       time: 0,
       onTime: true,
     };
@@ -70,15 +68,17 @@ export default {
     this.draft.canvas.height = height;
     this.backctx.canvas.width = width;
     this.backctx.canvas.height = height;
-    this.ctx.canvas.width = width;
-    this.ctx.canvas.height = height;
+    this.ctx.canvas.width = Math.floor(width);
+    this.ctx.canvas.height = Math.floor(height);
+
+    this.scale = (this.lab === 5) ? 2 : 2;
     this.ctx.scale(this.scale, this.scale);
     this.draft.scale(this.scale, this.scale);
+    this.backctx.scale(this.scale, this.scale);
     this.canvas.isDrawing = false;
     this.canvas.begin = [];
 
-    if (this.lab === '5') this.test5();
-    // else this.test6();
+    this.test();
   },
   watch: {
     bg(val) {
@@ -89,7 +89,7 @@ export default {
       this.ctx.fillStyle = val;
     },
     cmd(val) {
-      if (this.canvas.isDrawing) {
+      if (this.canvas.isDrawing && this.lab === '5') {
         this.onCanvasEnd();
       }
       cvs.canvasClear(this.draft);
@@ -97,13 +97,17 @@ export default {
         case 'clear':
           this.edge = [];
           clearInterval(this.timeout);
+          this.timeout = 0;
           cvs.canvasClear(this.ctx);
+          cvs.canvasClear(this.backctx);
           break;
         case 'run':
-          if (this.lab === '5') {
-            this.onFill();
+          if (this.timeout) {
+            clearInterval(this.timeout);
+          } else if (this.lab === '5') {
+            this.onFillScanLine();
           } else {
-            this.onFill();
+            this.onFillBoundary();
           }
           break;
         case 'seed':
@@ -113,8 +117,7 @@ export default {
           this.onTime = !this.onTime;
           break;
         case 'test':
-          if (this.lab === '5') this.test5();
-          else this.test6();
+          this.test();
           break;
         default:
           break;
@@ -128,7 +131,8 @@ export default {
       const y = Math.round((e.clientY - rect.top) / this.scale);
       if (this.onSeed) {
         this.seed = [x, y];
-        this.onSeed = false;
+        this.onFillBoundary();
+        // this.onSeed = false;
         return;
       }
       this.canvas.isDrawing = true;
@@ -155,8 +159,6 @@ export default {
         this.draft.beginPath();
         this.draft.arc(x, y, 2, 0, Math.PI * 2, true);
         this.draft.stroke();
-        // const p = this.ctx.getImageData(x * this.scale, y * this.scale, 1, 1).data.join('');
-        // console.log(p);
       } else {
         cvs.draftLine(x, y, this.draft, this.ctx);
       }
@@ -176,16 +178,24 @@ export default {
     drawLastLine() {
       cvs.drawLineBuiltin(this.ctx, ...this.edge[this.edge.length - 1], '#ff9f40');
     },
-    onFill() {
+    onFillScanLine() {
       this.time = window.performance.now();
-      this.timeout = scanLine(this.edge, this.ctx, this.fg, this.delay);
+      this.timeout = fillScanLine(this.edge, this.ctx, this.fg, this.delay);
       this.time = window.performance.now() - this.time;
     },
-    test5() {
-      this.edge = ironman;
-      ironman.forEach((d) => {
-        cvs.drawLineBuiltin(this.ctx, ...d, '#ff9f40');
+    onFillBoundary() {
+      if (this.seed.length === 0) return;
+      cvs.canvasClear(this.backctx);
+      this.time = window.performance.now();
+      this.timeout = fillBoundary(this.edge, this.seed, this.ctx, this.fg, '#d3d3d3', this.delay, this.scale);
+      this.time = window.performance.now() - this.time;
+    },
+    test() {
+      this.edge = (this.lab === '5') ? ironman : flags;
+      this.edge.forEach((d) => {
+        cvs.drawLineBuiltin(this.backctx, ...d, '#ff9f40');
       });
+      // const colorsList = ['#FFCD00', '#DA251D', #0033A0', '#DA291C', 'red'];
     },
   },
 };
@@ -194,6 +204,9 @@ export default {
 <style scoped>
 canvas {
   cursor: crosshair;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 #card-display {
   display: flex;
