@@ -38,3 +38,24 @@ export function draftLine(x, y, draft, base) {
     drawLineBuiltin(draft, canvas.x, canvas.y, x, y, color, 0.2);
   }
 }
+
+export function draftRect(x, y, draft, base) {
+  const { canvas } = base;
+
+  if (canvas.isDrawing) {
+    draft.beginPath();
+    draft.lineWidth = 1;
+    draft.rect(canvas.x, canvas.y, x - canvas.x, y - canvas.y);
+    draft.stroke();
+    // drawLineBuiltin(draft, canvas.x, canvas.y, x, y, color, 2);
+  }
+}
+
+export function drawRect(ctx, x1, y1, x2, y2, color, width = 1) {
+  ctx.strokeStyle = color;
+  ctx.lineWidth = width;
+  ctx.beginPath();
+  ctx.rect(x1, y1, x2 - x1, y2 - y1);
+  ctx.stroke();
+  ctx.closePath();
+}

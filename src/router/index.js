@@ -50,6 +50,27 @@ const routes = [
           panel: () => import('../views/lab56/Panel.vue'),
         },
       },
+      {
+        path: 'lab7',
+        components: {
+          default: () => import('../views/lab789/Canvas.vue'),
+          panel: () => import('../views/lab789/Panel.vue'),
+        },
+      },
+      {
+        path: 'lab8',
+        components: {
+          default: () => import('../views/lab789/Canvas.vue'),
+          panel: () => import('../views/lab789/Panel.vue'),
+        },
+      },
+      {
+        path: 'lab9',
+        components: {
+          default: () => import('../views/lab789/Canvas.vue'),
+          panel: () => import('../views/lab789/Panel.vue'),
+        },
+      },
     ],
   },
   {

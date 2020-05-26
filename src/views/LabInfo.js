@@ -16,10 +16,20 @@ export default {
   },
   5: {
     description: 'Area Filling (Scan Line)',
-    link: 'https://i.imgur.com/k39JUgQ.gif',
+    link: 'https://i.imgur.com/k39JUgQl.gif',
   },
   6: {
     description: 'Area Filling (Flood Fill)',
-    link: 'https://i.imgur.com/TVM4ca5.gif',
+    link: 'https://i.imgur.com/TVM4ca5l.gif',
+  },
+  7: {
+    description: 'Clipping (lines, rectangle win)',
+    link: 'https://i.imgur.com/7N0fTpr.png',
+  },
+  8: {
+    description: 'Clipping (lines, polygon win)',
+  },
+  9: {
+    description: 'Clipping (polygon, polygon win)',
   },
 };

@@ -1,4 +1,4 @@
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
@@ -16,7 +16,7 @@ module.exports = {
   configureWebpack: () => {
     const obj = { plugins: [] };
     if (process.env.NODE_ENV === 'development') {
-      obj.plugins.push(new BundleAnalyzerPlugin());
+      // obj.plugins.push(new BundleAnalyzerPlugin());
     }
     return obj;
   },

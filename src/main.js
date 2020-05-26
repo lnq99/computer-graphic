@@ -3,7 +3,7 @@ import Vue from 'vue';
 import {
   Col, Row, Card, Form, FormItem,
   Button, Select, Option, RadioButton, RadioGroup,
-  InputNumber, Slider, ColorPicker, Popover,
+  InputNumber, Slider, ColorPicker, Popover, Tooltip,
 } from 'element-ui';
 
 import lang from 'element-ui/lib/locale/lang/en';
@@ -30,6 +30,7 @@ Vue.use(InputNumber);
 Vue.use(Slider);
 Vue.use(ColorPicker);
 Vue.use(Popover);
+Vue.use(Tooltip);
 
 Vue.config.productionTip = false;
 
