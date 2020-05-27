@@ -15,7 +15,6 @@
 </el-col>
 </template>
 
-// Алгоритм Кируса-Бека
 // алгоритма Сазерленда-Ходжмена
 
 <script>
@@ -26,6 +25,7 @@ import test7 from './7/test7.json';
 import test8 from './8/test8.json';
 import test9 from './9/test9.json';
 import clipLineRect from './7/clip_line_rect';
+import { isConvexPolygon, CyrusBeckClip } from './8/clip_line_polygon';
 
 
 export default {
@@ -122,7 +122,7 @@ export default {
           // rec
           if (c.isDrawing) {
             this.win.push([c.x, c.y, x, y]);
-            cvs.drawRect(this.ctx, c.x, c.y, x, y, this.color[1]);
+            cvs.drawRect(this.ctx, c.x, c.y, x, y, this.color[1], 2);
           }
           c.isDrawing = !c.isDrawing;
         } else {
@@ -133,8 +133,11 @@ export default {
           } else if ((c.begin[0] - x) ** 2 + (c.begin[1] - y) ** 2 < 25) {
             this.onCanvasEnd(e);
           } else {
-            this.win.push([c.x, c.y, x, y]);
-            this.drawLastLine(this.win, this.color[1]);
+            const p1 = [c.x, c.y];
+            const p2 = [x, y];
+            this.win.push([p1, p2]);
+            // this.drawLastLine(this.win, this.color[1]);
+            cvs.drawLineBuiltin(this.ctx, ...p1, ...p2, this.color[1], 2);
           }
         }
       } else if (this.lab === 9) {
@@ -145,7 +148,7 @@ export default {
         } else if ((c.begin[0] - x) ** 2 + (c.begin[1] - y) ** 2 < 25) {
           this.onCanvasEnd(e);
         } else {
-          this.edge.push([c.x, c.y, x, y]);
+          this.edge.push([x, y, c.x, c.y]);
           this.drawLastLine();
         }
       } else {
@@ -175,10 +178,11 @@ export default {
       cvs.canvasClear(this.draft);
 
       if (this.isWin) {
-        this.win.push([...this.canvas.begin, this.canvas.x, this.canvas.y]);
-        this.drawLastLine(this.win, this.color[1]);
+        this.win.push([[this.canvas.x, this.canvas.y], this.canvas.begin]);
+        cvs.drawLineBuiltin(this.ctx, ...this.canvas.begin, this.canvas.x, this.canvas.y,
+          this.color[1], 2);
       } else {
-        this.edge.push([...this.canvas.begin, this.canvas.x, this.canvas.y]);
+        this.edge.push([this.canvas.x, this.canvas.y, ...this.canvas.begin]);
         this.drawLastLine();
       }
       this.canvas.begin = [];
@@ -200,7 +204,15 @@ export default {
       });
     },
     onClipLinePolygon() {
-
+      if (this.win.length < 3) return;
+      const convex = isConvexPolygon(this.win);
+      if (convex[0]) {
+        this.line.forEach(([x1, y1, x2, y2]) => {
+          let l = CyrusBeckClip([x1, y1], [x2, y2], this.win, convex[1]);
+          if (l.length) l = [...l[0], ...l[1]];
+          cvs.drawLineBuiltin(this.ctx, ...l, this.color[2], 2);
+        });
+      }
     },
     onClipPolygonPolygon() {
 
@@ -223,7 +235,8 @@ export default {
         if (this.lab === 7) {
           cvs.drawRect(this.ctx, ...d, this.color[1], 2);
         } else {
-          cvs.drawLineBuiltin(this.ctx, ...d, this.color[1]);
+          const [p1, p2] = d;
+          cvs.drawLineBuiltin(this.ctx, ...p1, ...p2, this.color[1], 2);
         }
       });
     },

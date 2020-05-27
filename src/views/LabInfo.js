@@ -24,10 +24,11 @@ export default {
   },
   7: {
     description: 'Clipping (lines, rectangle win)',
-    link: 'https://i.imgur.com/7N0fTpr.png',
+    link: 'https://i.imgur.com/7N0fTprl.png',
   },
   8: {
     description: 'Clipping (lines, polygon win)',
+    link: 'https://i.imgur.com/5Op3fkal.png',
   },
   9: {
     description: 'Clipping (polygon, polygon win)',

@@ -47,7 +47,6 @@ export function draftRect(x, y, draft, base) {
     draft.lineWidth = 1;
     draft.rect(canvas.x, canvas.y, x - canvas.x, y - canvas.y);
     draft.stroke();
-    // drawLineBuiltin(draft, canvas.x, canvas.y, x, y, color, 2);
   }
 }
 
