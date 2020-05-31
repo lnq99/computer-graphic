@@ -26,6 +26,7 @@ import test8 from './8/test8.json';
 import test9 from './9/test9.json';
 import clipLineRect from './7/clip_line_rect';
 import { isConvexPolygon, CyrusBeckClip } from './8/clip_line_polygon';
+import { getPolygonVertices, SutherlandHodgmanClip } from './9/clip_polygon_polygon';
 
 
 export default {
@@ -204,7 +205,6 @@ export default {
       });
     },
     onClipLinePolygon() {
-      if (this.win.length < 3) return;
       const convex = isConvexPolygon(this.win);
       if (convex[0]) {
         this.line.forEach(([x1, y1, x2, y2]) => {
@@ -215,7 +215,23 @@ export default {
       }
     },
     onClipPolygonPolygon() {
-
+      const convex = isConvexPolygon(this.win);
+      if (convex[0]) {
+        const edgeVertices = getPolygonVertices(this.edge);
+        const l = SutherlandHodgmanClip(edgeVertices, this.win, convex[1]);
+        if (l.length > 1) {
+          this.ctx.strokeStyle = this.color['2'];
+          this.ctx.beginPath();
+          this.ctx.moveTo(...l[0]);
+          for (let i = 1; i < l.length; i += 1) {
+            this.ctx.lineTo(...l[i]);
+          }
+          this.ctx.lineTo(...l[0]);
+          this.ctx.stroke();
+          this.ctx.fillStyle = `${this.color[2]}40`;
+          this.ctx.fill();
+        }
+      }
     },
     test() {
       if (this.lab === 7) {

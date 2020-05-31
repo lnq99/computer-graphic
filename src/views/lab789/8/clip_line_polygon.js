@@ -1,5 +1,8 @@
 /* eslint-disable no-unused-vars */
 
+const EPS = 10e-5;
+const TWO_PI = 2 * Math.PI + EPS;
+
 function getVector(p1, p2) {
   return [p2[0] - p1[0], p2[1] - p1[1]];
 }
@@ -12,10 +15,17 @@ function crossProduct(v1, v2) {
   return v1[0] * v2[1] - v1[1] * v2[0];
 }
 
+function lenVector(v) {
+  return Math.sqrt(v[0] ** 2 + v[1] ** 2);
+}
+
+
+// использовать суммарный угол - O(n)
 function isConvexPolygon(polygon) {
   const size = polygon.length;
   let pos = 0;
   let neg = 0;
+  let angleSum = 0;
 
   if (size < 3) return [false];
 
@@ -27,10 +37,16 @@ function isConvexPolygon(polygon) {
     const v2 = getVector(c1, c2);
 
     const check = crossProduct(v1, v2);
+    const cos = scalarProduct(v1, v2) / (lenVector(v1) * lenVector(v2));
+    angleSum += Math.acos(cos);
+
     if (check > 0) pos += 1;
     else if (check < 0) neg += 1;
     old = c1;
+
+    if (angleSum > TWO_PI) return [false];
   }
+  // console.log(angleSum, pos, neg, size);
 
   if (pos === size) return [true, true];
   if (neg === size) return [true, false];
