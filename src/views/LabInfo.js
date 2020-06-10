@@ -1,7 +1,7 @@
 export default {
-  1: {
-    description: 'Geometry Problem',
-  },
+  // 1: {
+  //   description: 'Geometry Problem',
+  // },
   2: {
     description: 'Transformation',
     link: 'https://i.imgur.com/eCFl9qjl.png',
@@ -15,11 +15,11 @@ export default {
     link: 'https://i.imgur.com/FHuAeQOl.png',
   },
   5: {
-    description: 'Area Filling (Scan Line)',
+    description: 'Area Filling (scan line)',
     link: 'https://i.imgur.com/C4YrbZPl.png',
   },
   6: {
-    description: 'Area Filling (Flood Fill)',
+    description: 'Area Filling (flood fill)',
     link: 'https://i.imgur.com/ZCskW7el.png',
   },
   7: {
@@ -33,5 +33,9 @@ export default {
   9: {
     description: 'Clipping (polygon, polygon win)',
     link: 'https://i.imgur.com/fRl0GbPl.png',
+  },
+  10: {
+    description: 'Hidden line removal (floating horizon)',
+    link: 'https://i.imgur.com/rRhEjNyl.png',
   },
 };

@@ -3,7 +3,7 @@ export function putPixel(ctx, x, y, w = 1, h = 1) {
   ctx.fillRect(x, y, w, h);
 }
 
-export function drawLineBuiltin(ctx, x1, y1, x2, y2, color, width = 1) {
+export function drawLineBuiltin(ctx, x1, y1, x2, y2, color = ctx.strokeStyle, width = 1) {
   ctx.strokeStyle = color;
   ctx.beginPath();
   ctx.lineWidth = width;

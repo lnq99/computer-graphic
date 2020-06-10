@@ -29,13 +29,14 @@ export default {
 }
 
 .el-card {
+  filter: contrast(98%);
   border-radius: 6px;
   margin-bottom: min(20px, 2vw);
   /* background-color: #fffff080; */
 }
 
 .el-card:hover {
-  filter: brightness(103%);
+  filter: brightness(102%);
   box-shadow: #66666660 2px 2px 12px;
 }
 

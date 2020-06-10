@@ -71,6 +71,13 @@ const routes = [
           panel: () => import('../views/lab789/Panel.vue'),
         },
       },
+      {
+        path: 'lab10',
+        components: {
+          default: () => import('../views/lab10/Canvas.vue'),
+          panel: () => import('../views/lab10/Panel.vue'),
+        },
+      },
     ],
   },
   {
