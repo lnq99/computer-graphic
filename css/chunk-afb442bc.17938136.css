@@ -1,0 +1,1 @@
+#card-display,#card-panel{height:98vh;display:flex;overflow-y:scroll}#card-display::-webkit-scrollbar,#card-panel::-webkit-scrollbar{width:0;background:transparent}#card-panel>.el-card__body{width:100%;padding:2vh min(20px,1vw)}canvas{height:98vh}
